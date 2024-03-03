@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Ref-NPR: Reference-Based Non-Photorealistic Radiance Fields</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto Serif" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/bulma-slider.min.css"> -->
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <!-- <script src="./static/js/bulma-slider.min.js"></script> -->
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">Ref-NPR: Reference-Based Non-Photorealistic Radiance Fields for Controllable Scene Stylization
+            </h1>
+            <h2 class="title publication-title is-3"> CVPR 2023 </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://julianjuaner.github.io/" target="_blank">Yuechen Zhang</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="https://zxhezexin.com/" target="_blank">Zexin He</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://doubiiu.github.io/" target="_blank">Jinbo Xing</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://appsrv.cse.cuhk.edu.hk/~xfyao/" target="_blank">Xufeng Yao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://jiaya.me/" target="_blank">Jiaya Jia</a><sup>1,2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>The Chinese University of Hong Kong,</span>
+              <span class="author-block"><sup>2</sup>SmartMore</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="./assets/2212.02766.pdf" class="button is-normal is-rounded is-dark"
+                    target="_blank">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Arxiv Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2212.02766" class="external-link button is-normal is-rounded is-dark"
+                    target="_blank">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://youtu.be/jnsnrTwVSBw" class="external-link button is-normal is-rounded is-dark"
+                    target="_blank">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/dvlab-research/Ref-NPR/" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/drive/folders/1b6L250lrBrSxfKYPmDBHuY_EP9n7WKnA?usp=share_link" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+				</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="hero is-light is-small">
+    
+    <div class="hero-body">
+      <div class="container" style="text-align:center">
+        * Given a 2D stylized view, Ref-NPR can stylize the whole nerf representation.<br>
+        In following examples, style reference in each case is generated by <b>hand drawing, 2D style transfer, or text-driven controllable generation (ControlNet)</b>.
+        <br><br>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-shiba">
+            <video poster="" id="shiba" autoplay controls muted loop playsinline width="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/npr_flower.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/flower_origin.png" style="width:50%; " />
+            <img src="./assets/flower_color.jpg" style="width:50%; " />
+          </div>
+          <div class="item item-horn">
+            <video poster="" id="horn" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/horn.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/horn_origin.png" style="width:50%; " />
+            <img src="./assets/horn_style.png" style="width:50%; " />
+          </div>
+          <div class="item item-fern">
+            <video poster="" id="fern" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/fern_control.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/fern_origin.png" style="width:50%; " />
+            <img src="./assets/fern_control.png" style="width:50%; " />
+          </div>
+          <div class="item item-trex">
+            <video poster="" id="trex" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/trex_1.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/trex.png" style="width:50%; " />
+            <img src="./assets/trex_1.png" style="width:50%; " />
+          </div>
+          <!-- <div class="item item-truck">
+            <video poster="" id="truck" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/flower_2.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/flower_origin.png" style="width:50%; " />
+            <img src="./assets/flower_2.png" style="width:50%; " />
+          </div>
+          <div class="item item-playground">
+            <video poster="" id="playground" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/3_ref_test_renders_path.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/flower_origin.png" style="width:50%; " />
+            <img src="./assets/flower_2.png" style="width:50%; " />
+          </div> -->
+          <div class="item item-trex">
+            <video poster="" id="trex" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/trex_2.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/trex.png" style="width:50%; " />
+            <img src="./assets/trex_2.png" style="width:50%; " />
+          </div>
+          <div class="item item-flower">
+            <video poster="" id="flower" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/flower_1.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/flower_origin.png" style="width:50%; " />
+            <img src="./assets/flower_1.png" style="width:50%; " />
+          </div>
+          <div class="item item-flower">
+            <video poster="" id="flower" autoplay controls muted loop playsinline height="100%"
+              style=" padding-bottom:5%">
+              <source src="./assets/flower_2.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/flower_origin.png" style="width:50%; " />
+            <img src="./assets/flower_2.png" style="width:50%; " />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-mic-abc">
+            <video poster="" id="mic-abc" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/full_npr_mic.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/mic_origin.png" width="50%" />
+            <img src="./assets/mic_ref_1.png" width="50%" />
+          </div>
+          <div class="item item-chair-leaf">
+            <video poster="" id="chair-leaf" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/chair_control.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/chair_origin.png" width="50%" />
+            <img src="./assets/chair_control.png" width="50%" />
+          </div>
+          <div class="item item-tree-red">
+            <video poster="" id="tree-red" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/ficus04.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/tree_origin.png" width="50%" />
+            <img src="./assets/tree_ref_red_highres.jpg" width="50%" />
+          </div>
+          <div class="item item-plate-ketchup">
+            <video poster="" id="plate-ketchup" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/hotdog_tmt.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/plate_origin.png" width="50%" />
+            <img src="./assets/plate_ref_ketchup.jpg" width="50%" />
+          </div>
+          <div class="item item-drum-control2">
+            <video poster="" id="drum-control2" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/drum_control2.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/drum_origin.png" width="50%" />
+            <img src="./assets/drum_control2.png" width="50%" />
+          </div>
+          <div class="item item-chair-control">
+            <video poster="" id="chair-control" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/control_chair.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/chair_origin.png" width="50%" />
+            <img src="./assets/control_chair.png" width="50%" />
+          </div>
+          <div class="item item-drum-control">
+            <video poster="" id="drum-control" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/drum_control.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/drum_origin.png" width="50%" />
+            <img src="./assets/drum_control.png" width="50%" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Existing 3D scene stylization methods employ an arbitrary style reference to transfer textures and colors
+              as styles without establishing meaningful semantic correspondences.
+              We present Reference-Based Non-Photorealistic Radiance Fields, i.e., Ref-NPR.
+              It is a controllable scene stylization method utilizing radiance fields to stylize a 3D scene, with a
+              single stylized 2D view taken as reference.
+              To achieve decent results, we propose a ray registration process based on the stylized reference view to
+              obtain pseudo-ray supervision in novel views, and exploit the semantic correspondence in content images to
+              fill occluded regions with perceptually similar styles.
+              Combining these operations, Ref-NPR generates non-photorealistic and continuous novel view sequences with
+              a single reference while obtaining reasonable stylization in occluded regions.
+              Experiments show that Ref-NPR significantly outperforms other scene and video stylization methods in terms
+              of both visual quality and semantic correspondence.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body has-text-justified">
+            <br>
+            <img src="./assets/teaser.png" width="100%" />
+            <h2 class="subtitle">
+              Ref-NPR propagates 2D style reference to 3D radiance fields
+              with Reference-Ray Registeration and Templated-Based Semantic Correspondence, thus obtaining better visual
+              quality and visual correspondence.
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/jnsnrTwVSBw" frameborder="0" allow="autoplay; encrypted-media"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <!-- Comparisons. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified">
+            <h2 class="title is-3">Comparisons</h2>
+            <p>
+              We compare <i>Ref-NPR</i> with two recent scene stylization methods, ARF and SNeRF, and also include a
+              reference-based video stylization method by Texler for a more comprehensive comparison.
+            </p>
+            <div class="columns is-vcentered has-text-centered">
+              <div style="width: 30%;">
+                <img src="./assets/mic_origin.png" height="50%" />
+                <p>Content</p>
+                <img src="./assets/mic_ref_1.png" height="50%" />
+                <p>Reference</p>
+              </div>
+              <div style="width: 70%; margin-left: 5%;">
+                <div height="50%" class="row columns">
+                  <div width="50%" class="column">
+                    <video poster="" id="mic-abc-texler" autoplay controls muted loop playsinline>
+                      <source src="./assets/mic_abc_texler.mp4" type="video/mp4">
+                    </video>
+                    <p>Texler</p>
+                  </div>
+                  <div width="50%" class="column">
+                    <video poster="" id="mic-abc-arf" autoplay controls muted loop playsinline>
+                      <source src="./assets/mic_abc_arf.mp4" type="video/mp4">
+                    </video>
+                    <p>ARF</p>
+                  </div>
+                </div>
+                <div height="50%" class="row columns">
+                  <div width="50%" class="column">
+                    <video poster="" id="mic-abc-snerf" autoplay controls muted loop playsinline>
+                      <source src="./assets/mic_abc_snerf.mp4" type="video/mp4">
+                    </video>
+                    <p>SNerf</p>
+                  </div>
+                  <div width="50%" class="column">
+                    <video poster="" id="mic-abc-refnpr" autoplay controls muted loop playsinline>
+                      <source src="./assets/full_npr_mic.mp4" type="video/mp4">
+                    </video>
+                    <p><b>Ref-NPR</b></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Comparisons. -->
+
+      <!-- Extensions. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content">
+            <h2 class="title is-3">Extensions</h2>
+            <!-- <p>
+            Descriptions for extensions.
+          </p> -->
+
+            <!-- Adaptation to 2D Stylization. -->
+            <div class="columns is-centered" , style="margin-bottom: 5%;">
+              <div class="column is-full-width">
+                <div class="content has-text-justified">
+                  <h3 class="title is-4">Adaptation to 2D Stylization</h3>
+                  <p>
+                    Although <i>Ref-NPR</i> itself requires a stylized reference view, it can be extended to use
+                    arbitrary style images as reference.
+                    We use three different 2D stylization methods to generate three reference views of the same scene,
+                    each with a slightly different stylization,
+                    and then feed them into <i>Ref-NPR</i> to enable rendering of stylized novel views.
+                    This extension enables <i>Ref-NPR</i> to work with arbitrary style reference images.
+                  </p>
+                  <div class="columns is-vcentered" style="margin-top: 2%;">
+                    <div class="has-text-centered" style="width: 30%;">
+                      <div style="height: 25%;">
+                        <p>Original Content</p>
+                        <img src="./assets/truck_origin.png" />
+                      </div>
+                      <div style="height: 25%;">
+                        <img src="./assets/truck_ref.jpg" />
+                        <p>Arbitrary Style</p>
+                      </div>
+                    </div>
+                    <div class="has-text-centered" style="width: 30%;">
+                      <img src="./assets/truck_NNST.png" height="33%" />
+                      <p>2D Reference by NNST</p>
+                      <img src="./assets/truck_Gatys.png" height="33%" />
+                      <p>2D Reference by Gatys</p>
+                      <img src="./assets/truck_AdaIN.png" height="33%" />
+                      <p>2D Reference by AdaIN</p>
+                    </div>
+                    <div class="has-text-centered" style="width: 40%; margin-left: 3%;">
+                      <div height="33%">
+                        <video poster="" id="truck-nnst" autoplay controls muted loop playsinline>
+                          <source src="./assets/truck_NNST.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div height="33%">
+                        <video poster="" id="truck-gatys" autoplay controls muted loop playsinline>
+                          <source src="./assets/truck_gatys.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div height="33%">
+                        <video poster="" id="truck-adain" autoplay controls muted loop playsinline>
+                          <source src="./assets/truck_adain.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ Adaptation to 2D Stylization. -->
+
+            <div class="columns is-centered" style="margin-bottom: 5%;">
+
+              <!-- Appearance Editing. -->
+              <div class="column has-text-justified" style="margin-right: 0%;">
+                <h3 class="title is-4">Appearance Editing</h3>
+                <p>
+                  Added ketchup in the reference image is demonstrated properly in the stylized scene.
+                </p>
+                <div class="columns is-vcentered">
+                  <div class="has-text-centered">
+                    <img src="./assets/ketchup.png" />
+                  </div>
+                  <div class="has-text-centered">
+                    <div style="height: 50%;">
+                      <video poster="" id="ketchup-no" autoplay controls muted loop playsinline>
+                        <source src="./assets/ketchup_no.mp4" type="video/mp4">
+                      </video>
+                      <!-- <p>Without ketchup</p> -->
+                    </div>
+                    <div style="height: 50%;">
+                      <video poster="" id="ketchup-yes" autoplay controls muted loop playsinline>
+                        <source src="./assets/ketchup_yes.mp4" type="video/mp4">
+                      </video>
+                      <!-- <p>Added ketchup</p> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/ Appearance Editing. -->
+
+              <!-- Controllability. -->
+              <div class="column has-text-justified" style="margin-left: 5%;">
+                <h3 class="title is-4">Controllability</h3>
+                <p>
+                  This extension allows great flexibility and controllability regarding to the provided 2D reference.
+                </p>
+                <div class="columns is-vcentered">
+                  <div class="has-text-centered">
+                    <img src="./assets/tree_ref_green.jpg" height="50%" />
+                    <video poster="" id="tree-ref-green" autoplay controls muted loop playsinline height="50%">
+                      <source src="./assets/ficus03.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="has-text-centered">
+                    <img src="./assets/tree_ref_red.jpg" height="50%" />
+                    <video poster="" id="tree-ref-red" autoplay controls muted loop playsinline height="50%">
+                      <source src="./assets/ficus04.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="has-text-centered">
+                    <img src="./assets/tree_ref_white.jpg" height="50%" />
+                    <video poster="" id="tree-ref-white" autoplay controls muted loop playsinline height="50%">
+                      <source src="./assets/ficus01.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!--/ Controllability. -->
+            </div>
+
+            <!-- Multi-Reference. -->
+            <div class="columns is-centered">
+              <div class="column is-full-width">
+                <div class="content has-text-justified">
+                  <h3 class="title is-4">Multi-Reference</h3>
+                  <p>
+                    <i>Ref-NPR</i> can be easily accommodated to multi-reference scenarios, by registering
+                    rays using all stylized reference views in R<sup>3</sup>, and by expanding
+                    the capacity of styles and content features in TCM.
+                    With two additional stylized views, better feature matching is obtained from richer style contents.
+                  </p>
+                  <div class="columns is-vcentered">
+                    <div class="column has-text-centered" style="width: 40%;">
+                      <img src="./assets/multi-ref.png" />
+                    </div>
+                    <div class="column has-text-centered" style="width: 50%;">
+                      <div height="50%">
+                        <video poster="" id="playground-single" autoplay controls muted loop playsinline>
+                          <source src="./assets/playground.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <p>Scene with a single reference</p>
+                      <div height="50%">
+                        <video poster="" id="playground-multiple" autoplay controls muted loop playsinline>
+                          <source src="./assets/3_ref_test_renders_path.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <p>Scene with multiple references</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ Multi-Reference. -->
+
+          </div>
+        </div>
+      </div>
+      <!--/ Extensions. -->
+
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@InProceedings{Zhang_2023_CVPR,
+        author    = {Zhang, Yuechen and He, Zexin and Xing, Jinbo and Yao, Xufeng and Jia, Jiaya},
+        title     = {Ref-NPR: Reference-Based Non-Photorealistic Radiance Fields for Controllable Scene Stylization},
+        booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+        month     = {June},
+        year      = {2023},
+        pages     = {4242-4251}
+    }</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="./assets/2212.02766.pdf" disabled>
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link external-link" href="https://arxiv.org/abs/2212.02766" disabled>
+          <i class="ai ai-arxiv"></i>
+        </a>
+        <a class="icon-link external-link" href="https://youtu.be/jnsnrTwVSBw" disabled>
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a class="icon-link external-link" href="" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+        <a class="icon-link external-link" href="" disabled>
+          <i class="far fa-images"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Website template credit to <a href="https://nerfies.github.io/">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
