@@ -95,10 +95,10 @@ def evaluation_feature(test_dataset, tensorf, args, renderer, chunk_size=2048, s
 
         if style_img is None:
             feature_map, _ = renderer(rays, tensorf, chunk=chunk_size, N_samples=N_samples, ndc_ray=ndc_ray, 
-                                        white_bg = white_bg, render_feature=True, device=device)
+                                        white_bg = white_bg, render_feature=True, device=device, args=args)
         else:
             feature_map, _, _,_, _, _ = renderer(rays, tensorf, chunk=chunk_size, N_samples=N_samples, ndc_ray=ndc_ray, 
-                                white_bg = white_bg, render_feature=True, style_img=style_img, device=device)
+                                white_bg = white_bg, render_feature=True, style_img=style_img, device=device, args=args)
                             
         feature_map = feature_map.reshape(H, W, 256)[None,...].permute(0,3,1,2)
 
