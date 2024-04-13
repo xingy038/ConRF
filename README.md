@@ -5,7 +5,7 @@ This repository contains a pytorch implementation for the paper: [ConRF: Zero-sh
 
 
 ## Installation
-> Tested on Ubuntu 20.04 + Pytorch 1.12.1
+> Tested on Ubuntu 22.04 + Pytorch 1.12.1
 
 Install environment:
 ```
