@@ -13,7 +13,7 @@ conda create -n ConRF python=3.9
 conda activate ConRF
 pip install torch torchvision
 pip install tqdm scikit-image opencv-python configargparse lpips imageio-ffmpeg kornia lpips tensorboard ftfy regex
-$ pip install git+https://github.com/openai/CLIP.git 
+pip install git+https://github.com/openai/CLIP.git 
 ```
 
 ## Datasets
