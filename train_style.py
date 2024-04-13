@@ -77,7 +77,7 @@ def render_test(args):
         print('the ckpt path does not exists!!')
         return
 
-    assert args.style_img is not None, 'Must specify a style image!'
+    # assert args.style_img is not None, 'Must specify a style image!'
 
     ckpt = torch.load(args.ckpt, map_location=device)
     kwargs = ckpt['kwargs']
