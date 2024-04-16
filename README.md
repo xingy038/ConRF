@@ -43,7 +43,7 @@ bash scripts/test_style.sh [GPU ID]
 The rendered stylized images can then be found in the directory under the checkpoint's path.
 
 ## Training
-> Current settings in `configs` are tested on one NVIDIA RTX A100 Graphics Card with 80G memory. To reduce memory consumption, you can set `batch_size`, `chunk_size` or `patch_size` to a smaller number.
+> Current settings in `configs` are tested on one A100 Graphics Card with 80G memory. To reduce memory consumption, you can set `batch_size`, `chunk_size` or `patch_size` to a smaller number.
 
 We follow StyleRF for the following 3 steps of training:
 ### 1. Train original TensoRF
