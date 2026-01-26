@@ -85,13 +85,16 @@ This repo is heavily based on the [TensoRF](https://github.com/apchenstu/TensoRF
 ## Citation
 If you find our code or paper helps, please consider citing:
 ```
-@misc{miao2024conrf,
-      title={ConRF: Zero-shot Stylization of 3D Scenes with Conditioned Radiation Fields}, 
-      author={Xingyu Miao and Yang Bai and Haoran Duan and Fan Wan and Yawen Huang and Yang Long and Yefeng Zheng},
-      year={2024},
-      eprint={2402.01950},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{MIAO2026113134,
+title = {ConRF: Zero-shot stylization of 3D scenes with conditioned radiation fields},
+journal = {Pattern Recognition},
+volume = {175},
+pages = {113134},
+year = {2026},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2026.113134},
+url = {https://www.sciencedirect.com/science/article/pii/S003132032600097X},
+author = {Xingyu Miao and Yang Bai and Haoran Duan and Fan Wan and Yawen Huang and Yang Long and Yefeng Zheng},
 }
 ```
 
