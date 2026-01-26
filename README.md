@@ -1,4 +1,4 @@
-# ConRF: Zero-shot Stylization of 3D Scenes with Conditioned Radiation Fields
+# [PR 2026] ConRF: Zero-shot Stylization of 3D Scenes with Conditioned Radiation Fields
 ## [Project page](https://xingy038.github.io/ConRF/) |  [Paper](https://arxiv.org/pdf/2402.01950)
 
 This repository contains a pytorch implementation for the paper: [ConRF: Zero-shot Stylization of 3D Scenes with Conditioned Radiation Fields](https://arxiv.org/pdf/2402.01950).  
